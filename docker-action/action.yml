@@ -1,0 +1,14 @@
+﻿name: Deployment Report Action
+description: Generate a deployment report using Docker
+inputs:
+  app-name:
+    description: Application name
+    required: true
+    default: student-portal
+  environment:
+    description: Deployment environment
+    required: true
+    default: development
+runs:
+  using: docker
+  image: Dockerfile
