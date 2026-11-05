@@ -1,0 +1,32 @@
+﻿name: Custom GitHub Actions Lab
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  custom-actions:
+    name: Execute Custom Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run JavaScript Action
+        id: welcome
+        uses: ./javascript-action
+        with:
+          student-name: Kartik
+
+      - name: Display Welcome Message
+        run: |
+          echo "Message from JavaScript Action:"
+          echo "${{ steps.welcome.outputs.welcome-message }}"
+
+      - name: Run Docker Container Action
+        uses: ./docker-action
+        with:
+          app-name: student-portal
+          environment: development
